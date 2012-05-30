@@ -314,7 +314,7 @@ class Batman.Model extends Batman.Object
           obj[key] = encoder.decode(data[encoder.as], encoder.as, data, obj, @)
 
     if @constructor.primaryKey isnt 'id'
-      obj.id = data[@constructor.primaryKey]
+      delete obj.id
 
     Batman.developer.do =>
       if (!encoders) || encoders.length <= 1
