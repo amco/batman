@@ -102,7 +102,7 @@ test "defined primaryKey should be decoded", ->
   equal p.get('id'), "deadbeef"
   equal p.get('_id'), "deadbeef"
 
-test "old primaryKey shouldn't overwrite current primaryKey", ->
+test "old primaryKey in JSON shouldn't wipe out custom primaryKey in object", ->
   p = new @Product
   p.fromJSON _id: id = 44
 
