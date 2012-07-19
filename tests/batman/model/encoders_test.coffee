@@ -107,12 +107,12 @@ test "old primaryKey in JSON shouldn't wipe out custom primaryKey in object", ->
   p.fromJSON _id: id = 44
 
   equal p.get('id'), id
-  equal p.get('_id'), p.get('_id')
+  equal p.get('_id'), id
 
   p.fromJSON id: not_id = 45
 
   equal p.get('id'), id
-  equal p.get('_id'), p.get('_id')
+  equal p.get('_id'), id
 
 test "the old primaryKey should not be decoded", ->
   json = {id: 10}
