@@ -102,6 +102,18 @@ test "defined primaryKey should be decoded", ->
   equal p.get('id'), "deadbeef"
   equal p.get('_id'), "deadbeef"
 
+test "old primaryKey shouldn't overwrite current primaryKey", ->
+  p = new @Product
+  p.fromJSON _id: id = 44
+
+  equal p.get('id'), id
+  equal p.get('_id'), p.get('_id')
+
+  p.fromJSON id: not_id = 45
+
+  equal p.get('id'), id
+  equal p.get('_id'), p.get('_id')
+
 test "the old primaryKey should not be decoded", ->
   json = {id: 10}
   p = new @Product()
