@@ -479,3 +479,17 @@ asyncTest 'should render a user defined filter', 4, ->
     ok spy.lastCallArguments[3] instanceof Batman.DOM.AbstractBinding
     delete Batman.Filters.test
     QUnit.start()
+
+asyncTest 'should hide node if value is gt binding', ->
+  helpers.render '<p type="checkbox" data-hideif="foo | gt 1"></p>',
+    foo: 2
+  , (node) ->
+     equal node.css('display'), 'none'
+    QUnit.start()
+
+asyncTest 'should hide node if value is lt binding', ->
+  helpers.render '<p type="checkbox" data-hideif="foo | lt 2"></p>',
+    foo: 1
+  , (node) ->
+     equal node.css('display'), 'none'
+    QUnit.start()
