@@ -36,6 +36,12 @@ Batman.Filters =
   not: (value, binding) ->
     ! !!value
 
+  gt: (value, binding) ->
+    value > binding
+
+  lt: (value, binding) ->
+    value < binding
+
   matches: buntUndefined (value, searchFor) ->
     value.indexOf(searchFor) isnt -1
 
