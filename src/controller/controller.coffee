@@ -45,6 +45,7 @@ class Batman.Controller extends Batman.Object
   constructor: ->
     super
     @_resetActionFrames()
+    @_oldRedirect = []
 
   renderCache: new Batman.RenderCache
   defaultRenderYield: 'main'
@@ -79,12 +80,12 @@ class Batman.Controller extends Batman.Object
     frame = new Batman.ControllerActionFrame {parentFrame, action}, =>
       @_runFilters action, params, 'afterFilters'
       @_resetActionFrames()
-      Batman.navigator?.redirect = oldRedirect
+      Batman.navigator?.redirect = @_oldRedirect.pop()
 
     @_actionFrames.push frame
     frame.startOperation({internal: true})
 
-    oldRedirect = Batman.navigator?.redirect
+    @_oldRedirect.push Batman.navigator?.redirect
     Batman.navigator?.redirect = @redirect
     @_runFilters action, params, 'beforeFilters'
 
